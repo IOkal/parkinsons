@@ -50,4 +50,4 @@ def predict():
     # We only process one sound file so there should only be one prediction to return.
     prediction = prediction_array[0]
 
-    return json.dumps({'y': y}), 200
+    return json.dumps({'prediction': prediction}), 200
