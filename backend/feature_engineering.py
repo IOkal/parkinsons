@@ -27,8 +27,7 @@ def engineer_features(sound):
     ddaShimmer = call([sound, pointProcess], "Get shimmer (dda)", 0, 0, 0.0001, 0.02, 1.3, 1.6)
 
     harmonicity = call(sound, "To Harmonicity (cc)", 0.01, 75, 0.1, 1.0)
-    nhr = 0
     hnr = call(harmonicity, "Get mean", 0, 0)
 
     # Return the features in the order the model will need them in
-    return np.array([jitter, jitterAbs, jitterRap, jitterPpq5, jitterDdp, shimmer, shimmerDb, apq3Shimmer, apq5Shimmer, apq11Shimmer, ddaShimmer, nhr, hnr, 0, 0, 0, 0, 0, 0])
+    return np.array([jitter, jitterAbs, jitterRap, jitterPpq5, jitterDdp, shimmer, shimmerDb, apq3Shimmer, apq5Shimmer, apq11Shimmer, ddaShimmer, hnr])
