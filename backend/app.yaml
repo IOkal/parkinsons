@@ -1,0 +1,14 @@
+runtime: python27
+
+api_version: 1
+
+threadsafe: false
+
+handlers:
+- url: /.*
+  script: main.py
+
+env_variables:
+    # The app will look for the model file at: gs://MODEL_BUCKET/MODEL_FILENAME
+    MODEL_BUCKET: parkinsons-models
+    MODEL_FILENAME: model.h5
