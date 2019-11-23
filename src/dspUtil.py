@@ -35,15 +35,13 @@ import praatUtil
 
 import scipy.misc 
 import scipy
+from scipy.misc import factorial
 from scipy import signal as scisig
 
 scipy.factorial = scipy.misc.factorial
 import scipy.signal
 
-try:
-	from scipy import weave as weave
-except:
-	import weave
+import weave
 	
 ######################################################################
 
@@ -778,7 +776,7 @@ def mapOntoTimeLine(arrTmaster, arrTdata, arrData, ignoreOutOfBoundsErrors = Fal
 		idx = int(round(t / float(timeStep)))
 		if idx < 0 or idx >= n:
 			if not ignoreOutOfBoundsErrors:
-				print i, len(arrTdata)
+				print (i, len(arrTdata))
 				raise Exception("time offset %f is out of bounds (%f - %f)" % \
 				    (t, arrTmaster[0], arrTmaster[-1]))
 		arrDataOut[idx] = arrData[i]

@@ -25,7 +25,7 @@ on a Mac, and was never really tested a Windows platform. There might be
 problems with the backslashes used in Windows path indicators.
 """
 
-import numpy, math, cPickle, os, string, sys, datetime, time, random, operator, copy
+import numpy, math, pickle, os, string, sys, datetime, time, random, operator, copy
 
 
 ######################################################################
