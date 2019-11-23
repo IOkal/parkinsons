@@ -3,4 +3,4 @@ runtime: python37
 env_variables:
     # The app will look for the model file at: gs://MODEL_BUCKET/MODEL_FILENAME
     MODEL_BUCKET: parkinsons-models
-    MODEL_FILENAME: app.h5
+    MODEL_FILENAME: model.h5
