@@ -2,8 +2,10 @@ import os
 import json
 from tensorflow.keras.models import load_model
 from fundamental_frequency import calculate_fundamental_frequency_features
+from feature_engineering import engineer_features
 import numpy as np
 import scipy
+import parselmouth
 from flask import Flask, request
 from google.cloud import storage
 
@@ -30,7 +32,7 @@ def download_wav(file_name):
     blob = bucket.blob(file_name)
     file_path = "/audio/%s.wav" % file_name
     blob.download_to_filename(file_path)
-    return scipy.io.wavfile.read(file_path)
+    return file_path
 
 
 @app.route('/predict', methods=['POST'])
@@ -39,13 +41,16 @@ def predict():
     file_name = request.get_json()['file_name']
 
     # Download the sound file from gcp
-    sound_file = download_wav(file_name)
+    sound_file_path = download_wav(file_name)
+    sound_file = scipy.io.wavfile.read(sound_file_path)
+    sound = parselmouth.Sound(sound_file_path)
 
     # Calculate features
     fundamental_frequency_features = calculate_fundamental_frequency_features(sound_file)
+    other_features = engineer_features(sound)
 
     # Concatenate features in the order the model expects, then make a prediction.
-    model_input = np.concatenate(fundamental_frequency_features)
+    model_input = np.concatenate(fundamental_frequency_features, other_features)
     prediction_array = MODEL.predict(model_input)
 
     # We only process one sound file so there should only be one prediction to return.
