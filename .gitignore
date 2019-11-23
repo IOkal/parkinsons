@@ -1,2 +1,3 @@
 /backend/.idea/*
 .DS_Store
+/backend/venv
