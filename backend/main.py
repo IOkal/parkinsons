@@ -23,22 +23,23 @@ def _load_model():
     s = blob.download_as_string()
     MODEL = load_model(s)
 
-def download_wav(fileid):
+
+def download_wav(file_name):
     storage_client = storage.Client()
     bucket = storage_client.get_bucket("voice-audio")
-    blob = bucket.blob(fileid)
-    blob.download_to_filename("/audio/%s.wav" % fileid)
+    blob = bucket.blob(file_name)
+    file_path = "/audio/%s.wav" % file_name
+    blob.download_to_filename(file_path)
+    return scipy.io.wavfile.read(file_path)
+
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    # get the fileid
-    fileid = request.get_json()['fileid']
+    # Get the WAV file name from the request. Must include the .wav extension.
+    file_name = request.get_json()['file_name']
 
-    # download the file from gcp
-    download_wav(fileid)
-
-    # read the downloaded wav
-    sound_file = scipy.io.wavfile.read("/audio/%s.wav" % fileid)
+    # Download the sound file from gcp
+    sound_file = download_wav(file_name)
 
     # Calculate features
     fundamental_frequency_features = calculate_fundamental_frequency_features(sound_file)
