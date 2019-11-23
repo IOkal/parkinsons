@@ -1,16 +1,6 @@
-runtime: python
-
-api_version: 1
-
-threadsafe: false
-
-env: flex
-
-handlers:
-- url: /.*
-  script: main.py
+runtime: python37
 
 env_variables:
     # The app will look for the model file at: gs://MODEL_BUCKET/MODEL_FILENAME
     MODEL_BUCKET: parkinsons-models
-    MODEL_FILENAME: model.h5
+    MODEL_FILENAME: app.h5
