@@ -269,7 +269,7 @@
                 <div class="single_feature_page bordered">
                   <div class="container text-lg-center">
                     <div class="section_tittle">
-                        <h1 id="prediction"></h1>
+                        <h1 id="prediction">0.00%</h1>
                         <br>
                         <p>Probability of Patient having Parkinson's</p>
                     </div>
@@ -425,4 +425,39 @@ var myChart = new Chart(ctx, {
     ]
   }
 });
+
+const readUploadedFileAsText = inputFile => {
+  const temporaryFileReader = new FileReader();
+
+  return new Promise((resolve, reject) => {
+    temporaryFileReader.onerror = () => {
+      temporaryFileReader.abort();
+      reject(new DOMException("Problem parsing input file."));
+    };
+
+    temporaryFileReader.onload = () => {
+      console.log(temporaryFileReader);
+      resolve(temporaryFileReader.result);
+    };
+    temporaryFileReader.readAsBinaryString(inputFile);
+  });
+};
+
+async function inference(file) {
+  console.log(file);
+  console.log("Entering inference function");
+  var data = await readUploadedFileAsText(file);
+  console.log(data);
+  var response = await lib.tobcar["parkinsons-classification"]["@dev"]({
+    file: data
+  });
+
+  console.log(response);
+
+  document.getElementById("prediction").innerHTML = (response.prediction * 100).toFixed(2).toString() + "%";
+  y[0] = response.averageFundamentalFrequency / 800;
+  y[1] = response.jitter;
+  y[2] = response.shimmer;
+  myChart.update();
+}
 </script>
