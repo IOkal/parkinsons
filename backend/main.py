@@ -59,7 +59,7 @@ def predict():
 
     # Concatenate features in the order the model expects, then make a prediction.
     model_input = np.concatenate([fundamental_frequency_features, other_features])
-    model_input = np.reshape(model_input, (15,1))
+    model_input = np.reshape(model_input, (1, 15))
     prediction_array = MODEL.predict(model_input)
 
     # We only process one sound file so there should only be one prediction to return.
