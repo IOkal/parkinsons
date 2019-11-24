@@ -1,3 +1,28 @@
+//const axios = require('axios');
+
+//-------- inference the neural network --------//
+function inference(file) {
+  var r = new FileReader()
+  axios.post('https://parkinsons-259907.appspot.com/predict', {
+    file: r.readAsBinaryString(file)
+  }, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(function (response) {
+    console.log(response);
+  }).catch(function (error) {
+    console.log(error);
+  })
+}
+
+function handleFiles(files) {
+  files = [...files]
+  /*initializeProgress(files.length)
+  files.forEach(uploadFile)
+  files.forEach(previewFile)*/
+  inference(files[0]);
+}
 
 (function ($) {
   "use strict";

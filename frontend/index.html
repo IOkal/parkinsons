@@ -334,7 +334,7 @@
 </html>
 
 <script>
-const axios = require('axios');
+
 
 // ************************ Drag and drop ***************** //
 let dropArea = document.getElementById("drop-area")
@@ -432,26 +432,4 @@ function uploadFile(file, i) {
   xhr.send(formData)
 }
 
-//-------- inference the neural network --------//
-function inference(file) {
-  axios.post('https://parkinsons-259907.appspot.com/predict', {
-    file: file.getAsBinary()
-  }, {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then(function (response) {
-    console.log(response);
-  }).catch(function (error) {
-    console.log(error);
-  })
-}
-
-function handleFiles(files) {
-  files = [...files]
-  /*initializeProgress(files.length)
-  files.forEach(uploadFile)
-  files.forEach(previewFile)*/
-  inference(files[0]);
-}
 </script>
