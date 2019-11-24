@@ -9,7 +9,6 @@ from feature_engineering import engineer_features
 import numpy as np
 import scipy
 import parselmouth
-import wave # new import for binary conversion
 from flask import Flask, request
 from google.cloud import storage
 
@@ -57,15 +56,15 @@ def download_wav(file_name):
 def predict():
     # Get the WAV file name from the request. Must include the .wav extension.
     binary_file_data = request.get_json()['file']
-
-    packedData = map(lambda v:struct.pack('h',v), binary_file_data)
-    frames = b''.join(packedData)
-    wav_file = output_wave('output.wav', frames)
+    
+    binary_file_path = "audio.wav"
+    with open(binary_file_path, 'wb') as f:
+        f.write(binary_file_data)
 
     # Download the sound file from gcp
         # sound_file_path = download_wav(file_name)
-    sound_file = scipy.io.wavfile.read(wav_file) # replace sound_file_path with wav_file
-    sound = parselmouth.Sound(wav_file)
+    sound_file = scipy.io.wavfile.read(binary_file_path) # replace sound_file_path with wav_file
+    sound = parselmouth.Sound(binary_file_path)
 
     # Calculate features
     fundamental_frequency_features = calculate_fundamental_frequency_features(sound_file)
