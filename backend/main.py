@@ -43,10 +43,10 @@ def _load_model():
 @app.route('/predict', methods=['POST'])
 def predict():
     # Get the WAV file name from the request. Must include the .wav extension.
-    binary_file_data = request.get_json()['file']
+    binary_file_data = request.form['file']
     
     binary_file_path = "audio.wav"
-    with open(binary_file_path, 'wb') as f:
+    with open(binary_file_path, 'w') as f:
         f.write(binary_file_data)
 
     # Download the sound file from gcp
