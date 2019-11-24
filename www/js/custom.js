@@ -27,12 +27,9 @@ async function inference(file) {
   });
 
   document.getElementById("prediction").value = response.prediction;
-  document.getElementById("averageFundamentalFrequency").value =
-    response.averageFundamentalFrequency;
+  document.getElementById("averageFundamentalFrequency").value = response.averageFundamentalFrequency;
   document.getElementById("jitter").value = response.jitter;
   document.getElementById("shimmer").value = response.shimmer;
-  var alpha = 10;
-  export { alpha };
   console.log(response);
 }
 

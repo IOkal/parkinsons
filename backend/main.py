@@ -60,15 +60,18 @@ def predict():
     # Concatenate features in the order the model expects, then make a prediction.
     model_input = np.concatenate([fundamental_frequency_features, other_features])
     model_input = np.reshape(model_input, (1, 15))
+    for i in range(len(model_input)):
+        if np.isnan(model_input[i]):
+            model_input[i] = 0
     prediction_array = MODEL.predict(model_input)
 
     # We only process one sound file so there should only be one prediction to return.
-    prediction = prediction_array[0]
+    prediction = prediction_array[0][0]
 
-    return json.dumps({'prediction': prediction,
-                       'averageFundamentalFrequency': model_input[0][0],
-                       'jitter': model_input[0][3],
-                       'shimmer': model_input[0][8]}), 200
+    return json.dumps({'prediction': str(prediction),
+                       'averageFundamentalFrequency': str(model_input[0][0]),
+                       'jitter': str(model_input[0][3]),
+                       'shimmer': str(model_input[0][8])}), 200
 
 
 if __name__ == '__main__':

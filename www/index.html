@@ -271,26 +271,15 @@
                     <div class="section_tittle">
                         <h1 id="prediction"></h1>
                         <br>
-                        <p>Probability of Patient having parkinson's</p>
+                        <p>Probability of Patient having Parkinson's</p>
                     </div>
-
-                      <!-- <p>Darkness multiply rule Which from without life creature blessed
-                          give moveth moveth seas make day which divided our have.</p> -->
                   </div>
                 </div>
             </div>
             <div class="col-lg-8 col-sm-6">
-              <div class="container ">
+              <div class="container">
                   <canvas id="myChart" width="1600" height="900"></canvas>
               </div>
-                <!-- <div class="single_feature_page"> -->
-                    <!-- <h4>Better Future2</h4> -->
-                    <!-- <p>Darkness multiply rule Which from without life creature blessed
-                        give moveth moveth seas make day which divided our have.</p> -->
-                        <!-- <canvas id="canvas" > <!--width="800" height="600" 
-                        </canvas> -->
-                        <!-- <canvas id="myChart" width="1600" height="900"></canvas> -->
-                <!-- </div> -->
             </div>
           </div>
         </section>
@@ -419,7 +408,7 @@ function uploadFile(file, i) {
 }
 
 var x = ["Average Fundamental Frequeqncy", "Jitters", "Shimmers"];
-var y = [10, 30, 20];
+var y = [0, 1, 0.5];
 
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
@@ -429,7 +418,7 @@ var myChart = new Chart(ctx, {
     datasets: [
       {
         data: y,
-        label: "Probability",
+        label: "Value",
         borderColor: "#3e95cd",
         fill: false
       }
