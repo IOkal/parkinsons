@@ -6,7 +6,7 @@ from tensorflow.keras.models import Sequential
 from fundamental_frequency import calculate_fundamental_frequency_features
 from feature_engineering import engineer_features
 import numpy as np
-import scipy
+import scipy.io.wavfile
 import parselmouth
 from flask import Flask, request
 
@@ -43,10 +43,10 @@ def _load_model():
 @app.route('/predict', methods=['POST'])
 def predict():
     # Get the WAV file name from the request. Must include the .wav extension.
-    binary_file_data = request.get_json()['file']
+    binary_file_data = request.form['file']
     
     binary_file_path = "audio.wav"
-    with open(binary_file_path, 'wb') as f:
+    with open(binary_file_path, 'w') as f:
         f.write(binary_file_data)
 
     # Download the sound file from gcp
@@ -58,7 +58,8 @@ def predict():
     other_features = engineer_features(sound)
 
     # Concatenate features in the order the model expects, then make a prediction.
-    model_input = np.concatenate(fundamental_frequency_features, other_features)
+    model_input = np.concatenate([fundamental_frequency_features, other_features])
+    model_input = np.reshape(model_input, (15,1))
     prediction_array = MODEL.predict(model_input)
 
     # We only process one sound file so there should only be one prediction to return.
