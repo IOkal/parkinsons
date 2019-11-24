@@ -41,7 +41,7 @@ def _load_model():
     MODEL = create_model()
     MODEL.load_weights(temp_model_location)
 
-
+'''
 def download_wav(file_name):
     storage_client = storage.Client()
     bucket = storage_client.get_bucket("voice-audio")
@@ -50,16 +50,21 @@ def download_wav(file_name):
     open(file_path, 'a').close()  # Create an empty file at path
     blob.download_to_filename(file_path)
     return file_path
+'''
 
 @app.route('/predict', methods=['POST'])
 def predict():
     # Get the WAV file name from the request. Must include the .wav extension.
-    file_name = request.get_json()['file_name']
+    binary_file_data = request.get_json()['file']
+    
+    binary_file_path = "audio.wav"
+    with open(binary_file_path, 'wb') as f:
+        f.write(binary_file_data)
 
     # Download the sound file from gcp
-    sound_file_path = download_wav(file_name)
-    sound_file = scipy.io.wavfile.read(sound_file_path)
-    sound = parselmouth.Sound(sound_file_path)
+        # sound_file_path = download_wav(file_name)
+    sound_file = scipy.io.wavfile.read(binary_file_path) # replace sound_file_path with wav_file
+    sound = parselmouth.Sound(binary_file_path)
 
     # Calculate features
     fundamental_frequency_features = calculate_fundamental_frequency_features(sound_file)
