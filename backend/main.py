@@ -1,7 +1,6 @@
 import os
 import json
 from tensorflow.python.lib.io import file_io
-from tensorflow.keras.models import load_model
 from tensorflow.keras.layers import Dense, Dropout, Input
 from tensorflow.keras.models import Sequential
 from fundamental_frequency import calculate_fundamental_frequency_features
@@ -10,7 +9,6 @@ import numpy as np
 import scipy
 import parselmouth
 from flask import Flask, request
-from google.cloud import storage
 
 MODEL_BUCKET = os.environ['MODEL_BUCKET']
 MODEL_FILENAME = os.environ['MODEL_FILENAME']
