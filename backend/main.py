@@ -41,16 +41,6 @@ def _load_model():
     MODEL = create_model()
     MODEL.load_weights(temp_model_location)
 
-'''
-def download_wav(file_name):
-    storage_client = storage.Client()
-    bucket = storage_client.get_bucket("voice-audio")
-    blob = bucket.blob(file_name)
-    file_path = "/audio/%s" % file_name
-    open(file_path, 'a').close()  # Create an empty file at path
-    blob.download_to_filename(file_path)
-    return file_path
-'''
 
 @app.route('/predict', methods=['POST'])
 def predict():
