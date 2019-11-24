@@ -396,13 +396,6 @@ function updateProgress(fileNumber, percent) {
   progressBar.value = total
 }
 
-function handleFiles(files) {
-  files = [...files]
-  initializeProgress(files.length)
-  files.forEach(uploadFile)
-  files.forEach(previewFile)
-}
-
 function previewFile(file) {
   let reader = new FileReader()
   reader.readAsDataURL(file)
@@ -448,9 +441,17 @@ function inference(file) {
       'Content-Type': 'application/json'
     }
   }).then(function (response) {
-
+    console.log(response);
   }).catch(function (error) {
     console.log(error);
   })
+}
+
+function handleFiles(files) {
+  files = [...files]
+  /*initializeProgress(files.length)
+  files.forEach(uploadFile)
+  files.forEach(previewFile)*/
+  inference(files[0]);
 }
 </script>
