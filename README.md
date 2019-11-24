@@ -3,16 +3,14 @@ Team Members: Tobias Carryer, Iyad Okal, Will Wang, Kyle Meade
 
 Developed at HackWestern 2019. [Devpost link](https://devpost.com/software/test-mzb73k)
 
-## Inspiration
-Over ten million people worldwide experience Parkinson's disease (PD) yet current methods have only 53% accuracy in detecting early PD symptoms. Recent innovations in machine learning have increased the diagnostic capabilities when diagnosing PD just with a patient's voice, so we’ve developed a tool to help doctors leverage that technology.
+## Inspiration/Backgroynd
+Over ten million people worldwide are diagnosed with Parkinson’s Disease (PD), with studies suggesting that there are many more people who are not diagnosed due to the low accuracy of modern day testing methods (53% accurate). Recent studies have shown that Voice can play a strong role in detecting early PD symptoms, and so we set out to develop a tool to help doctors leverage this advance in technology to assist them to more accurately diagnose PD patients.
 
 ## What it does
-Our program takes in an audio file of someone talking and outputs the likelihood the person has Parkinson's.
+Our app works as a tool for doctors to aid them to detect early signs of Parkinson’s Disease in Patients. It does so by taking an audio file of someone speaking and passing it through to our Custom built Machine Learning Model, there it computes the discrete Fourier transform of the audio file, and analyses the patient’s speech based on 22 features. The ML instance returns the probability of the user showing early sings of the Parkinson’s Disease. It also returns the scores of each of the 22 features so that the doctor can have a detailed explanation as to how the probability was calculated. All of this is displayed in the Dashboard that the doctor would be able to access.
 
 ## How we built it
-During inference, we used various Python libraries to extract 15 of the 22 features in a person's voice known to be predictive of Parkinson’s. The features are then passed through our neural network hosted on Google Cloud Platform through a Flask server. Finally, a probability is returned to the front-end which tells the user their likelihood of having Parkinson’s. A responsive graph displaying several parameters is then rendered for data visualization.
-
-We trained a neural network to predict Parkinson's from 15 vocal parameters found in a person's voice. The model is trained using a data set from the University of Oxford. The features were extrapolated from dozens of research papers published over the past few years.
+At first we went through dozens of scholarly articles and read up about the relation between Voice and Parkinson’s Disease. Through our research we were able to find 22 features and their mathematical algorithms, from which we were able to recreate 15. We then trained a neural network to predict Parkinson’s from those 15 features. We used a data set from the University of Oxford to train our model. We set up our neural network on the Google Cloud Platform through a Flask server. Finally, we pass back the results from the neural network to the Dashboard for a clean Data visualization.
 
 ## Challenges we ran into
 Engineering the extraction methods for each individual feature was especially tough, since none of us had prior experience in the physics behind acoustics and tonality. Using Fourier Fast Transform, we determined the metrics related to the fundamental frequencies. Using Parselmouth, a Python library for the Praat software, we calculated metrics of jitter and shimmer. Each of the 15 features we found took extensive research and obscure Python libraries to compute.
