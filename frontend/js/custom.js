@@ -3,7 +3,7 @@
 //-------- inference the neural network --------//
 function inference(file) {
   var r = new FileReader()
-  axios.post('https://parkinsons-259907.appspot.com/predict', {
+  axios.post('https://TobCar.api.stdlib.com/parkinsons-classification@0.1.0/predict', {
     file: r.readAsBinaryString(file)
   }, {
     headers: {
