@@ -66,9 +66,9 @@ def predict():
     prediction = prediction_array[0]
 
     return json.dumps({'prediction': prediction,
-                       'averageFundamentalFrequency': model_input[0],
-                       'jitter': model_input[3],
-                       'shimmer': model_input[8]}), 200
+                       'averageFundamentalFrequency': model_input[0][0],
+                       'jitter': model_input[0][3],
+                       'shimmer': model_input[0][8]}), 200
 
 
 if __name__ == '__main__':
