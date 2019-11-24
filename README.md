@@ -3,7 +3,7 @@ Team Members: Tobias Carryer, Iyad Okal, Will Wang, Kyle Meade
 
 Developed at HackWestern 2019. [Devpost link](https://devpost.com/software/test-mzb73k)
 
-## Inspiration/Backgroynd
+## Inspiration/Background
 Over ten million people worldwide are diagnosed with Parkinson’s Disease (PD), with studies suggesting that there are many more people who are not diagnosed due to the low accuracy of modern day testing methods (53% accurate). Recent studies have shown that Voice can play a strong role in detecting early PD symptoms, and so we set out to develop a tool to help doctors leverage this advance in technology to assist them to more accurately diagnose PD patients.
 
 ## What it does
