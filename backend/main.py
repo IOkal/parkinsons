@@ -2,6 +2,8 @@ import os
 import json
 from tensorflow.python.lib.io import file_io
 from tensorflow.keras.models import load_model
+from tensorflow.keras.layers import Dense, Dropout, Input
+from tensorflow.keras.models import Sequential
 from fundamental_frequency import calculate_fundamental_frequency_features
 from feature_engineering import engineer_features
 import numpy as np
@@ -17,6 +19,16 @@ MODEL = None
 app = Flask(__name__)
 
 
+def create_model():
+    # Create a neural network
+    model = Sequential()
+    model.add(Input((15,)))
+    model.add(Dense(100, activation='relu'))
+    model.add(Dense(1, activation='sigmoid'))
+    model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
+    return model
+
+
 @app.before_first_request
 def _load_model():
     global MODEL
@@ -26,14 +38,16 @@ def _load_model():
     temp_model_file.write(model_file.read())
     temp_model_file.close()
     model_file.close()
-    MODEL = load_model(temp_model_location)
+    MODEL = create_model()
+    MODEL.load_weights(temp_model_location)
 
 
 def download_wav(file_name):
     storage_client = storage.Client()
     bucket = storage_client.get_bucket("voice-audio")
     blob = bucket.blob(file_name)
-    file_path = "/audio/%s.wav" % file_name
+    file_path = "/audio/%s" % file_name
+    open(file_path, 'a').close()  # Create an empty file at path
     blob.download_to_filename(file_path)
     return file_path
 
