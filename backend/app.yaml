@@ -1,6 +1,19 @@
-runtime: python37
+runtime: python
+env: flex
+entrypoint: gunicorn -b :$PORT main:app
+
+runtime_config:
+  python_version: 3
 
 env_variables:
     # The app will look for the model file at: gs://MODEL_BUCKET/MODEL_FILENAME
     MODEL_BUCKET: parkinsons-models
     MODEL_FILENAME: model.h5
+
+manual_scaling:
+  instances: 1
+
+resources:
+  cpu: 1
+  memory_gb: 2
+  disk_size_gb: 40

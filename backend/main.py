@@ -1,5 +1,6 @@
 import os
 import json
+from tensorflow.python.lib.io import file_io
 from tensorflow.keras.models import load_model
 from fundamental_frequency import calculate_fundamental_frequency_features
 from feature_engineering import engineer_features
@@ -19,11 +20,13 @@ app = Flask(__name__)
 @app.before_first_request
 def _load_model():
     global MODEL
-    client = storage.Client()
-    bucket = client.get_bucket(MODEL_BUCKET)
-    blob = bucket.get_blob(MODEL_FILENAME)
-    s = blob.download_as_string()
-    MODEL = load_model(s)
+    model_file = file_io.FileIO('gs://'+MODEL_BUCKET+'/'+MODEL_FILENAME, mode='rb')
+    temp_model_location = './temp_model.h5'
+    temp_model_file = open(temp_model_location, 'wb')
+    temp_model_file.write(model_file.read())
+    temp_model_file.close()
+    model_file.close()
+    MODEL = load_model(temp_model_location)
 
 
 def download_wav(file_name):
@@ -57,3 +60,9 @@ def predict():
     prediction = prediction_array[0]
 
     return json.dumps({'prediction': prediction}), 200
+
+
+if __name__ == '__main__':
+    # This is used when running locally. Gunicorn is used to run the
+    # application on Google App Engine. See entrypoint in app.yaml.
+    app.run(host='127.0.0.1', port=8080, debug=True)
