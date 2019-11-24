@@ -343,12 +343,14 @@
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/mail-script.js"></script>
     <script src="js/contact.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- custom js -->
     <script src="js/custom.js"></script>
   </body>
 </html>
 
 <script>
+const axios = require('axios');
 
 // ************************ Drag and drop ***************** //
 let dropArea = document.getElementById("drop-area")
@@ -451,5 +453,20 @@ function uploadFile(file, i) {
   formData.append('upload_preset', 'ujpu6gyk')
   formData.append('file', file)
   xhr.send(formData)
+}
+
+//-------- inference the neural network --------//
+function inference(file) {
+  axios.post('https://parkinsons-259907.appspot.com/predict', {
+    file: file.getAsBinary()
+  }, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(function (response) {
+
+  }).catch(function (error) {
+    console.log(error);
+  })
 }
 </script>
