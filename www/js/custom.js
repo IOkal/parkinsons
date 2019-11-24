@@ -1,28 +1,52 @@
 //const axios = require('axios');
 
 //-------- inference the neural network --------//
-function inference(file) {
+
+const readUploadedFileAsText = inputFile => {
+  const temporaryFileReader = new FileReader();
+
+  return new Promise((resolve, reject) => {
+    temporaryFileReader.onerror = () => {
+      temporaryFileReader.abort();
+      reject(new DOMException("Problem parsing input file."));
+    };
+
+    temporaryFileReader.onload = () => {
+      console.log(temporaryFileReader);
+      resolve(temporaryFileReader.result);
+    };
+    temporaryFileReader.readAsBinaryString(inputFile);
+  });
+};
+
+async function inference(file) {
+  console.log(file);
   console.log("Entering inference function");
-  var r = new FileReader();
-  axios
-    .post(
-      "https://TobCar.api.stdlib.com/parkinsons-classification@0.1.0/predict/",
-      {
-        file: r.readAsBinaryString(file)
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*"
-        }
-      }
-    )
-    .then(function(response) {
-      console.log(response);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
+  var data = await readUploadedFileAsText(file);
+  console.log(data);
+  var response = await lib.tobcar["parkinsons-classification"]["@dev"]({
+    file: data
+  });
+  console.log(response);
+  // axios
+  //   .post(
+  //     "https://TobCar.api.stdlib.com/parkinsons-classification@0.1.0/predict/",
+  //     {
+  //       file: r.readAsBinaryString(file)
+  //     },
+  //     {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Access-Control-Allow-Origin": "*"
+  //       }
+  //     }
+  //   )
+  //   .then(function(response) {
+  //     console.log(response);
+  //   })
+  //   .catch(function(error) {
+  //     console.log(error);
+  //   });
 }
 
 function handleFiles(files) {
