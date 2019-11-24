@@ -1,3 +1,3 @@
 # Diagnosing Parkinsons
-Using a neural network.
+Using a Multilayer Perceptron.
 Team Members: Tobias Carryer, Iyad Okal, Will Wang, Kyle Meade
