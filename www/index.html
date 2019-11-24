@@ -125,11 +125,10 @@
            <!--Upload Function goes here-->
             <div id="drop-area">
                 <form class="my-form">
-                  <p>Upload a .wav file with the file dialog or by dragging and dropping into the dashed region</p>
+                  <p>Upload a .wav file with the file dialog.</p>
                   <input type="file" id="fileElem" multiple accept="audio/*" onchange="handleFiles(this.files)">
                   <label class="button" for="fileElem">Select Audio File</label>
                 </form>
-                <progress id="progress-bar" max=100 value=0></progress>
             </div>
           <div class="col-lg-4 col-sm-12">
             <div class="single_feature_img">
@@ -362,25 +361,6 @@ function handleDrop(e) {
   handleFiles(files)
 }
 
-let uploadProgress = []
-let progressBar = document.getElementById('progress-bar')
-
-function initializeProgress(numFiles) {
-  progressBar.value = 0
-  uploadProgress = []
-
-  for(let i = numFiles; i > 0; i--) {
-    uploadProgress.push(0)
-  }
-}
-
-function updateProgress(fileNumber, percent) {
-  uploadProgress[fileNumber] = percent
-  let total = uploadProgress.reduce((tot, curr) => tot + curr, 0) / uploadProgress.length
-  console.debug('update', fileNumber, percent, total)
-  progressBar.value = total
-}
-
 function previewFile(file) {
   let reader = new FileReader()
   reader.readAsDataURL(file)
@@ -397,20 +377,6 @@ function uploadFile(file, i) {
   var formData = new FormData()
   xhr.open('POST', url, true)
   xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
-
-  // Update progress (can be used to show progress indicator)
-  xhr.upload.addEventListener("progress", function(e) {
-    updateProgress(i, (e.loaded * 100.0 / e.total) || 100)
-  })
-
-  xhr.addEventListener('readystatechange', function(e) {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      updateProgress(i, 100) // <- Add this
-    }
-    else if (xhr.readyState == 4 && xhr.status != 200) {
-      // Error. Inform the user
-    }
-  })
 
   formData.append('upload_preset', 'ujpu6gyk')
   formData.append('file', file)
