@@ -1,5 +1,3 @@
-//const axios = require('axios');
-
 //-------- inference the neural network --------//
 
 const readUploadedFileAsText = inputFile => {
