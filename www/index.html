@@ -226,7 +226,7 @@
               <div class="single_text">
                 <div class="single_blog_text">
                   <h3>Dr Iyad Okal</h3>
-                  <p>Front-end Developer</p>
+                  <p>Full-Stack Developer</p>
                 </div>
               </div>
             </div>
@@ -261,6 +261,39 @@
       </div>
     </section>
     <!--::doctor_part end::-->
+    
+    <section>
+    <div class="container padding_top padding_bottom">
+        <div class="row align-content-center">
+            <div class="col-lg-4 col-sm-6 ">
+                <div class="single_feature_page bordered">
+                  <div class="container text-lg-center">
+                    <div class="section_tittle">
+                        <h1 id="prediction"></h1>
+                        <br>
+                        <p>Probability of Patient having parkinson's</p>
+                    </div>
+
+                      <!-- <p>Darkness multiply rule Which from without life creature blessed
+                          give moveth moveth seas make day which divided our have.</p> -->
+                  </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-sm-6">
+              <div class="container ">
+                  <canvas id="myChart" width="1600" height="900"></canvas>
+              </div>
+                <!-- <div class="single_feature_page"> -->
+                    <!-- <h4>Better Future2</h4> -->
+                    <!-- <p>Darkness multiply rule Which from without life creature blessed
+                        give moveth moveth seas make day which divided our have.</p> -->
+                        <!-- <canvas id="canvas" > <!--width="800" height="600" 
+                        </canvas> -->
+                        <!-- <canvas id="myChart" width="1600" height="900"></canvas> -->
+                <!-- </div> -->
+            </div>
+          </div>
+        </section>
   
     <!-- footer part start-->
     <footer class="footer-area">
@@ -314,6 +347,8 @@
     <!-- custom js -->
     <script src="js/lib.js"></script>
     <script src="js/custom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script src="js/myChart.js"></script>
   </body>
 </html>
 
@@ -383,4 +418,24 @@ function uploadFile(file, i) {
   xhr.send(formData)
 }
 
+var x = ["Average Fundamental Frequeqncy", "Jitters", "Shimmers"];
+var y = [10, 30, 20];
+
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+  type: "line",
+  data: {
+    labels: x,
+    datasets: [
+      {
+        data: y,
+        label: "Probability",
+        borderColor: "#3e95cd",
+        fill: false
+      }
+    ]
+  }
+});
+import { alpha } from 'js/custom.js'
+console.log(alpha);
 </script>
