@@ -51,7 +51,6 @@ def download_wav(file_name):
     blob.download_to_filename(file_path)
     return file_path
 
-
 @app.route('/predict', methods=['POST'])
 def predict():
     # Get the WAV file name from the request. Must include the .wav extension.
@@ -73,7 +72,10 @@ def predict():
     # We only process one sound file so there should only be one prediction to return.
     prediction = prediction_array[0]
 
-    return json.dumps({'prediction': prediction, 'features': model_input.tolist()}), 200
+    return json.dumps({'prediction': prediction,
+                       'averageFundamentalFrequency': model_input[0],
+                       'jitter': model_input[3],
+                       'shimmer': model_input[8]}), 200
 
 
 if __name__ == '__main__':
