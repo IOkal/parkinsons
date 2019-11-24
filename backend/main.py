@@ -52,8 +52,7 @@ def predict():
         f.write(binary_file_data)
 
     # Download the sound file from gcp
-        # sound_file_path = download_wav(file_name)
-    sound_file = scipy.io.wavfile.read(binary_file_path) # replace sound_file_path with wav_file
+    sound_file = scipy.io.wavfile.read(binary_file_path)
     sound = parselmouth.Sound(binary_file_path)
 
     # Calculate features
