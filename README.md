@@ -1,9 +1,9 @@
 # Diagnosing Parkinson's
 🏥 Hack Western 6 Entry - Diagnosing Parkinson’s from a person’s voice with 92% accuracy.
 
-> ⚠️ This is a Hackathon entry for HackWestern, and was created in under 36 hours. The code in this repo is likely to be hacky and potentially unstable/insecure, so please be careful if forking this repo. [You can view the project's Devpost page here.](https://devpost.com/software/test-mzb73k)
-
 > 🏆 Parkinsons.AI won **Best use of Standard Library** and **Best Health Hack** At HackWestern!
+
+> ⚠️ This is a Hackathon entry for HackWestern, and was created in under 36 hours. The code in this repo is likely to be hacky and potentially unstable/insecure, so please be careful if forking this repo. [You can view the project's Devpost page here.](https://devpost.com/software/test-mzb73k)
 
 Team Members: Tobias Carryer, Iyad Okal, Will Wang, Kyle Meade
 
