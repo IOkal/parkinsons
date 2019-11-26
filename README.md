@@ -1,7 +1,11 @@
 # Diagnosing Parkinson's
-Team Members: Tobias Carryer, Iyad Okal, Will Wang, Kyle Meade
+🏥 Hack Western 6 Entry - Diagnosing Parkinson’s from a person’s voice with 92% accuracy.
 
-Developed at HackWestern 2019. [Devpost link](https://devpost.com/software/test-mzb73k)
+> ⚠️ This is a Hackathon entry for HackWestern, and was created in under 36 hours. The code in this repo is likely to be hacky and potentially unstable/insecure, so please be careful if forking this repo. [You can view the project's Devpost page here.](https://devpost.com/software/test-mzb73k)
+
+> 🏆 Parkinsons.AI won **Best use of Standard Library** and **Best Health Hack** At HackWestern!
+
+Team Members: Tobias Carryer, Iyad Okal, Will Wang, Kyle Meade
 
 ## Inspiration/Background
 Over ten million people worldwide are diagnosed with Parkinson’s Disease (PD), with studies suggesting that there are many more people who are not diagnosed due to the low accuracy of modern day testing methods (53% accurate). Recent studies have shown that Voice can play a strong role in detecting early PD symptoms, and so we set out to develop a tool to help doctors leverage this advance in technology to assist them to more accurately diagnose PD patients.
